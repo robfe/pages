@@ -1,0 +1,22 @@
+
+body, h1,h2,h3{
+  font-family: "Segoe UI", Helvetica;
+}
+
+[data-prefix]:before{
+    content:attr(data-prefix) ': ';
+}
+
+
+textarea{
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  min-height: 150px;
+  display:block;
+  background: #ddd;
+  border-radius: 3px;
+  padding: 7px;
+  transition:background 0.2s ease;
+  
+}

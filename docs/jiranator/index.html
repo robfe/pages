@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <a class="bookmarklet" data-prefix="Drag this bookmarklet to the favourites bar, and then click the bookmarklet from a JIRA ticket page"
+        href="javascript:document.location = 'https://robfe.github.io/pages/jiranator/#'+encodeURIComponent(document.location.pathname.replace(/^.*\//, '')+' '+document.getElementById('summary-val').innerText)">JIRA Halper</a>
+    <br />
+    <h1>Options:</h1>
+    <label for="ticket">Branch Name:</label>
+    <input type="text" id="ticket" size="50" />
+    <h1>Git Scripts:</h1>
+    <h2>Checkout / Create branch:</h2>
+    <textarea>
+if ! git checkout {ticket};
+then 
+    git checkout master;
+    git pull --rebase
+    git checkout -b {ticket};
+fi
+</textarea>
+
+    <h2>Checkout / Create branch With Stash:</h2>
+    <textarea>
+git stash;
+if ! git checkout {ticket};
+then 
+    git checkout master;
+    git pull --rebase
+    git checkout -b {ticket};
+fi;
+git stash pop;
+</textarea>
+
+    <h1>Create PR</h1>
+    <a href="https://github.com/pushpay/pushpay/" data-href-placeholder="https://github.com/pushpay/pushpay/compare/{ticket}?expand=1">Once you've pushed the branch, click here to create the PR</a>
+
+
+    <h1>Other bookmarklets:</h1>
+    <a class="bookmarklet" data-prefix="Create a ticket from selected text on any page" href="javascript:
+var text = window.getSelection().toString();
+var p = {
+	pid:10000, /*project: PP*/
+	issuetype:1, /*1:bug,2:new feature,3:task*/
+	customfield_11000:'10200', /*production issue: no*/
+	priority:4,
+	summary: text,
+	description:`{code}\n${text}\n{code}\n\nfrom: ${document.location.toString()}`,
+	reporter:'rob.fonseca-ensor'
+};
+
+var ps = Object.keys(p).map(x=>`${x}=${encodeURIComponent(p[x])}`).join('&');
+var url = 'https://pushpay.atlassian.net/secure/CreateIssueDetails!init.jspa?'+ps;
+
+window.open(url);
+">Create JIRA Bug<a>
+<br />
+<script src="script.js"></script>
+</body>
+
+</html>
