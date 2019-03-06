@@ -11,7 +11,7 @@
 
 <body>
     <a class="bookmarklet" data-prefix="Drag this bookmarklet to the favourites bar, and then click the bookmarklet from a JIRA ticket page"
-        href="javascript:document.location = 'https://robfe.github.io/pages/jiranator/#'+encodeURIComponent(document.location.pathname.replace(/^.*\//, '')+' '+document.getElementById('summary-val').innerText)">JIRA Halper</a>
+        href="javascript:document.location = 'https://robfe.github.io/pages/jiranator/#'+encodeURIComponent(document.title.replace(' - '+document.head.querySelector('meta[name=ajs-app-title]').content, ''))">JIRA Halper</a>
     <br />
     <h1>Options:</h1>
     <label for="ticket">Branch Name:</label>
